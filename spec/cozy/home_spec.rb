@@ -13,10 +13,11 @@ describe "Cozy app at home.cozy.co" do
     text.should include 'Welcome, please sign in to Cozy.'
   end
 
-  it 'can sign in as Matt Greensmith landlord account' do
-    text_field(:name => "email").set "matt.greensmith+cozylandlord@gmail.com"
-    text_field(:name => "password").set "cozylandlordpassword"
+  it 'can sign in with a valid landlord account' do
+    text_field(:name => "email").set @config[:landlord_email]
+    text_field(:name => "password").set @config[:landlord_password]
     form(:action => '/signin').submit
+    # a URI ending in an 8-digit alnum string implies a successful sign in
     url.should =~ /https:\/\/home.cozy.co\/[a-z0-9]{8}/
   end
 

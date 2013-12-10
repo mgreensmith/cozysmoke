@@ -1,6 +1,8 @@
 
-# Configuration for watir-rspec
+# Configuration for watir-rspec, with local modifications
 require "watir/rspec"
+require 'yaml'
+require 'active_support/core_ext/hash/indifferent_access'
 
 RSpec.configure do |config|
   # Use Watir::RSpec::HtmlFormatter to get links to the screenshots, html and
@@ -8,8 +10,9 @@ RSpec.configure do |config|
   config.add_formatter(:progress) if config.formatters.empty?
   config.add_formatter(Watir::RSpec::HtmlFormatter)
 
-  # Open up the browser for each example.
+  # Open up the browser for each example, and load a local config from file.
   config.before :all do
+    @config = YAML.load_file(File.join(File.dirname(__FILE__), '..', 'config', 'config.yml')).with_indifferent_access
     @browser = Watir::Browser.new
   end
 
