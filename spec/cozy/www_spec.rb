@@ -1,11 +1,11 @@
-require "spec_helper"
+require 'spec_helper'
 
-describe "Marketing site at www.cozy.co" do
+describe 'Marketing site at www.cozy.co' do
   before :all do
-    goto "http://www.cozy.co"
+    goto 'http://www.cozy.co'
   end
 
-  it "redirects to https and lands on /for-landlords" do
+  it 'redirects to https and lands on /for-landlords' do
     url.should == 'https://www.cozy.co/for-landlords/'
   end
 

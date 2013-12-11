@@ -1,6 +1,6 @@
 
 # Configuration for watir-rspec, with local modifications
-require "watir/rspec"
+require 'watir/rspec'
 require 'yaml'
 require 'active_support/core_ext/hash/indifferent_access'
 
@@ -12,7 +12,9 @@ RSpec.configure do |config|
 
   # Open up the browser for each example, and load a local config from file.
   config.before :all do
-    @config = YAML.load_file(File.join(File.dirname(__FILE__), '..', 'config', 'config.yml')).with_indifferent_access
+    @config = YAML.load_file(
+        File.join(File.dirname(__FILE__), '..', 'config', 'config.yml')
+      ).with_indifferent_access
     @browser = Watir::Browser.new
   end
 
@@ -21,8 +23,8 @@ RSpec.configure do |config|
     @browser.close if @browser
   end
 
-  # Include RSpec::Helper into each of your example group for making it possible to
-  # write in your examples instead of:
+  # Include RSpec::Helper into each of your example group for making it
+  # possible to write in your examples instead of:
   #   @browser.goto "localhost"
   #   @browser.text_field(:name => "first_name").set "Bob"
   #
@@ -34,14 +36,15 @@ RSpec.configure do |config|
   # before :all block.
   config.include Watir::RSpec::Helper
 
-  # Include RSpec::Matchers into each of your example group for making it possible to
-  # use #within with some of RSpec matchers for easier asynchronous testing:
+  # Include RSpec::Matchers into each of your example group for making it
+  # possible to use #within with some of RSpec matchers for easier
+  # asynchronous testing:
   #   @browser.text_field(:name => "first_name").should exist.within(2)
   #   @browser.text_field(:name => "first_name").should be_present.within(2)
   #   @browser.text_field(:name => "first_name").should be_visible.within(2)
   #
-  # You can also use #during to test if something stays the same during the specified period:
+  # You can also use #during to test if something stays the same during
+  # the specified period:
   #   @browser.text_field(:name => "first_name").should exist.during(2)
   config.include Watir::RSpec::Matchers
 end
-  
