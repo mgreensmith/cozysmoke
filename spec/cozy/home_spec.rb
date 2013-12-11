@@ -18,7 +18,9 @@ describe 'Cozy app at home.cozy.co' do
     text_field(name: 'password').set @config[:landlord_password]
     form(action: '/signin').submit
     # a URI ending in an 8-digit alnum string implies a successful sign in
-    url.should =~ %r{https://home.cozy.co/[a-z0-9]{8}}
+    # and that the 'new property' page has autoloaded
+    # A URI of /dashboard is also valid, so we'll accept 8 or 9 chars
+    url.should =~ %r{https://home.cozy.co/[a-z0-9]{8,9}}
   end
 
   it 'page content contains text "ADD A PROPERTY"' do
