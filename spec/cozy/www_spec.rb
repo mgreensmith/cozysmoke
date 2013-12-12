@@ -4,9 +4,9 @@ describe 'Marketing site at www.cozy.co, with optimizely disabled' do
   before :all do
     begin
       goto 'http://www.cozy.co/?optimizely_opt_out=true'
-    rescue Selenium::WebDriver::Error::UnhandledAlertError
+    rescue Selenium::WebDriver::Error::UnhandledAlertError # rubocop:disable HandleExceptions
       # Apparently it's impossible to gracefully handle an alert triggered onload?
-      # Also big thanks to optimizely for forcing a JS alert is you opt out... /s
+      # Also big thanks to optimizely for forcing a JS alert if you opt out... /s
     end
   end
 

@@ -3,6 +3,7 @@
 require 'watir/rspec'
 require 'yaml'
 require 'active_support/core_ext/hash/indifferent_access'
+Dir[File.expand_path(File.join(File.dirname(__FILE__), 'support', 'matchers', '*.rb'))].each { |f| require f }
 
 RSpec.configure do |config|
   # Use Watir::RSpec::HtmlFormatter to get links to the screenshots, html and
