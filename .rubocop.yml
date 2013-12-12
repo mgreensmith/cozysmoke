@@ -2,3 +2,7 @@ Encoding:
   Enabled: false
 LineLength:
   Enabled: false
+
+AllCops:
+  Includes:
+    - Rakefile
