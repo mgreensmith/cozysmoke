@@ -14,16 +14,12 @@ describe 'Cozy app at home.cozy.co' do
   end
 
   it 'rejects a sign in attempt with invalid credentials' do
-    text_field(name: 'email').set 'nonexistant@email.com'
-    text_field(name: 'password').set 'justafakepassword'
-    form(action: '/signin').submit
+    log_in('fake@email.com', 'fakepassword')
     url.should be_cozy_url_for(:root)
   end
 
   it 'can sign in with a valid landlord account' do
-    text_field(name: 'email').set @config[:landlord_email]
-    text_field(name: 'password').set @config[:landlord_password]
-    form(action: '/signin').submit
+    log_in_as_landlord
     url.should be_cozy_url_for(:dashboard) || be_cozy_url_for(:property_admin)
   end
 

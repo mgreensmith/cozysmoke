@@ -3,7 +3,7 @@
 require 'watir/rspec'
 require 'yaml'
 require 'active_support/core_ext/hash/indifferent_access'
-Dir[File.expand_path(File.join(File.dirname(__FILE__), 'support', 'matchers', '*.rb'))].each { |f| require f }
+Dir[File.expand_path(File.join(File.dirname(__FILE__), 'support', '**', '*.rb'))].each { |f| require f }
 
 RSpec.configure do |config|
   # Use Watir::RSpec::HtmlFormatter to get links to the screenshots, html and
@@ -48,4 +48,6 @@ RSpec.configure do |config|
   # the specified period:
   #   @browser.text_field(:name => "first_name").should exist.during(2)
   config.include Watir::RSpec::Matchers
+
+  config.include Cozy::Helpers
 end
