@@ -13,6 +13,13 @@ describe 'Cozy app at home.cozy.co' do
     text.should include 'Welcome, please sign in to Cozy.'
   end
 
+  it 'rejects a sign in attempt with invalid credentials' do
+    text_field(name: 'email').set 'nonexistant@email.com'
+    text_field(name: 'password').set 'justafakepassword'
+    form(action: '/signin').submit
+    url.should be_cozy_url_for(:root)
+  end
+
   it 'can sign in with a valid landlord account' do
     text_field(name: 'email').set @config[:landlord_email]
     text_field(name: 'password').set @config[:landlord_password]
